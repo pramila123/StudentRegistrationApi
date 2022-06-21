@@ -15,40 +15,37 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.com.model.Student;
 import com.sms.com.repository.StudentRepository;
+
 @CrossOrigin("http://localhost:3000")
 @RestController
 public class StudentController {
 	@Autowired
 	private StudentRepository srepo;
+
 	@PostMapping("/student/register")
-	public String addStudent(@RequestBody Student s)
-	{
-		 srepo.save(s);
-		 return "Data Inserted Successfully" ;
+	public String addStudent(@RequestBody Student s) {
+		srepo.save(s);
+		return "Data Inserted Successfully";
 	}
-	
+
 	@GetMapping("/student/list")
-	public List<Student> getAllStudent()
-	{
+	public List<Student> getAllStudent() {
 		return srepo.findAll();
 	}
-	
-	
+
 	@DeleteMapping("student/delete/{id}")
-	public String deleteStudent(@PathVariable("id") int id)
-	{
+	public String deleteStudent(@PathVariable("id") int id) {
 		srepo.deleteById(id);
 		return "Deleted Success";
 	}
-	
+
 	@GetMapping("/student/{id}")
-	public Optional<Student> getById(@PathVariable("id")int id){
+	public Optional<Student> getById(@PathVariable("id") int id) {
 		return srepo.findById(id);
 	}
-	
+
 	@PutMapping("/student/update")
-	public Student updateStudent(@RequestBody Student s)
-	{
+	public Student updateStudent(@RequestBody Student s) {
 		return srepo.save(s);
 	}
 

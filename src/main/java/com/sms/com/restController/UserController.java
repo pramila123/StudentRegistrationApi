@@ -20,17 +20,15 @@ import com.sms.com.repository.UserRepository;
 public class UserController {
 	@Autowired
 	private UserRepository urepo;
-	
+
 	@PostMapping("/add/user")
-	public User addUser(@RequestBody User u)
-	{
+	public User addUser(@RequestBody User u) {
 		u.setPassword(DigestUtils.md5DigestAsHex(u.getPassword().getBytes()));
 		return urepo.save(u);
 	}
-	
+
 	@GetMapping("/user")
-	public List<User> getAll()
-	{
+	public List<User> getAll() {
 		return urepo.findAll();
 	}
 
